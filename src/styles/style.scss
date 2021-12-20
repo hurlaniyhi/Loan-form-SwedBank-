@@ -207,10 +207,12 @@ p{
     font-weight: bold;
     color: $color-white;
     z-index: 2;
+    cursor: pointer;
 }
 .step-text{
     font-size: 1.5rem;
     color: #247886;
+    cursor: pointer;
 
     @media (max-width: 360px){
         display: none;
@@ -336,7 +338,7 @@ p{
     top: 50%;
     right: 1rem;
     transform: translateY(-50%);
-    font-size: 1.3rem;
+    font-size: 1.7rem;
     cursor: pointer;
     z-index: 1;
 }
@@ -511,10 +513,11 @@ p{
     width: 90%;
     height: 17rem;
     border: 1px solid #BCD8DA;
-    padding: 0 1.5rem;
+    padding: 1.5rem;
     margin: 1.5rem 0 1rem 0;
     border-radius: .35rem;
     display: block;
+    font-family: Helvetica, Arial, sans-serif;
 }
 .centered-mid{
     width: 60%;
@@ -530,4 +533,8 @@ p{
     @media (max-width: 320px){
         width: 90%;
     }
+}
+.space-label{
+    padding-bottom: 1.5rem;
+    display: block
 }

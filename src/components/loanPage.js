@@ -1,10 +1,11 @@
 import { useState, useRef } from 'react'
 import companyLogo from '../assets/swedbank-img-logo.svg'
-import Slider from 'react-input-slider';
+import PhoneInput from 'react-phone-input-2'
+import 'react-phone-input-2/lib/style.css'
 import '../styles/style.scss'
 
 const SmallLoan = () => {
-    const [amount, setAmount] = useState(500)
+    const [phone, setPhone] = useState(null)
     const commentContainer = useRef(null)
     const commentText = useRef(null)
 
@@ -55,7 +56,7 @@ const SmallLoan = () => {
                         </div>
                     </div>
                     <form className="form-body">
-                        <div className="application-form no-display">
+                        <div className="application-form">
                             <div className="form-centered">
                                 <div className="range-input-wrapper">
                                     <label className="input-label">Loan amount (&euro;) <span style={{color: '#F35A1B'}}>*</span></label>
@@ -92,7 +93,7 @@ const SmallLoan = () => {
                                                 <option>15</option>
                                             </select>
                                             <span className="dropdown-text">drop down value</span>
-                                            <span className="dropdown-icon">&#9660;</span>
+                                            <span className="dropdown-icon"><i class="fa fa-angle-down"></i></span>
                                         </div>
                                 </div>
                             </div>
@@ -128,9 +129,9 @@ const SmallLoan = () => {
                             </div>
                         </div>
 
-                        <div className="application-form">
+                        <div className="application-form no-display">
                             <div className="section-container">
-                                <h3 className="section-title">Borrower Data</h3>
+                                <h3 className="section-title">Borrower data</h3>
                                 <div className="form-centered">
                                     <div className="range-input-wrapper">
                                         <label className="input-label">First name <span style={{color: '#F35A1B'}}>*</span></label>
@@ -144,10 +145,25 @@ const SmallLoan = () => {
                                         <label className="input-label">Personal code <span style={{color: '#F35A1B'}}>*</span></label>
                                         <input className="input-field no-background resize-input" />
                                     </div>
+                                    <div className="range-input-wrapper">
+                                        <label className="input-label">Marital Status <span style={{color: '#F35A1B'}}>*</span></label>
+                                        <div className="custom-dropdown input-field">
+                                            <select className="select-field">
+                                                <option value=""></option>
+                                                <option>Single</option>
+                                                <option>Married</option>
+                                                <option>Common law marriage</option>
+                                                <option>Divorced</option>
+                                                <option>Widow/Widower</option>
+                                            </select>
+                                            <span className="dropdown-text">drop down value</span>
+                                            <span className="dropdown-icon"><i class="fa fa-angle-down"></i></span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div className="section-container">
-                                <h3 className="section-title">Extended Data</h3>
+                                <h3 className="section-title">Extended data</h3>
                                 <div className="form-centered">
                                     <div className="range-input-wrapper">
                                         <label className="input-label">Education<span style={{color: '#F35A1B'}}>*</span></label>
@@ -160,7 +176,9 @@ const SmallLoan = () => {
                                                 <option>Higher</option>
                                             </select>
                                             <span className="dropdown-text">drop down value</span>
-                                            <span className="dropdown-icon">&#9660;</span>
+                                            <span className="dropdown-icon"><i class="fa fa-angle-down"></i></span>
+                                            {/* <span className="dropdown-icon">&#9660;</span> */}
+                                            
                                         </div>
                                     </div>
                                     <div className="range-input-wrapper">
@@ -180,27 +198,7 @@ const SmallLoan = () => {
                                                 <option>Private enterpreneur</option>
                                             </select>
                                             <span className="dropdown-text">drop down value</span>
-                                            <span className="dropdown-icon">&#9660;</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="section-container">
-                                <h3 className="section-title">Personal Data</h3>
-                                <div className="form-centered">
-                                    <div className="range-input-wrapper">
-                                        <label className="input-label">Marital Status <span style={{color: '#F35A1B'}}>*</span></label>
-                                        <div className="custom-dropdown input-field">
-                                            <select className="select-field">
-                                                <option value=""></option>
-                                                <option>Single</option>
-                                                <option>Married</option>
-                                                <option>Common law marriage</option>
-                                                <option>Divorced</option>
-                                                <option>Widow/Widower</option>
-                                            </select>
-                                            <span className="dropdown-text">drop down value</span>
-                                            <span className="dropdown-icon">&#9660;</span>
+                                            <span className="dropdown-icon"><i class="fa fa-angle-down"></i></span>
                                         </div>
                                     </div>
                                 </div>
@@ -209,8 +207,24 @@ const SmallLoan = () => {
                                 <h3 className="section-title">Contact data</h3>
                                 <div className="form-centered">
                                     <div className="range-input-wrapper">
-                                        <label className="input-label">Phone <span style={{color: '#F35A1B'}}>*</span></label>
-                                        <input className="input-field no-background resize-input" />
+                                        <label className="input-label space-label">Phone <span style={{color: '#F35A1B'}}>*</span></label>
+                                        <PhoneInput
+                                            country={'us'}
+                                            value={phone}
+                                            onChange={setPhone}
+                                            containerClass={{
+                                                marginTop: "1.5rem"
+                                            }}
+                                            inputStyle={
+                                               {
+                                                  width: window.matchMedia('(max-width: 400px)').matches ? "62%" : window.matchMedia('(max-width: 750px)').matches ? "52%" : "39%",
+                                                  //width: "39%",
+                                                   height: '4.5rem',
+                                                   border: "1px solid #BCD8DA",
+                                                   borderRadius: "0.35rem"
+                                               }
+                                            }
+                                        />
                                     </div>
                                 </div>
                             </div>
@@ -221,7 +235,7 @@ const SmallLoan = () => {
                             </p>
                             <div className="comment-toggle-wrapper">
                                 <span className="toggle-line"></span>
-                                <a className="toggle-btn" onClick={handleComment}>&#9669; Comment</a>
+                                <a className="toggle-btn" onClick={handleComment}><i class="fa fa-angle-down" style={{paddingRight: "1rem"}} aria-hidden="true"></i> Comments</a>
                             </div>
                             
                             <div className="form-centered">
