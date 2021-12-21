@@ -355,6 +355,47 @@ p{
     padding-bottom: .7rem;
     border-bottom: .05rem solid rgba(0,0,0, .1);
 }
+.remove-margin{
+    margin: 0;
+}
+
+.summary-row{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-bottom: .05rem solid rgba(0,0,0, .1);
+    font-size: 1.6rem;
+
+    @media(max-width: 400px){
+        justify-content: space-between;
+    }
+}
+.summary-description{
+    color: #A38C81;
+    width: 38%;
+    padding: .2rem 1%;
+
+    @media(max-width: 530px){
+        width: 45%
+    }
+
+    @media(max-width: 400px){
+        width: auto
+    }
+}
+.summary-value{
+    color: rgba(0,0,0, .7);
+    width: 58%;
+    padding: .2rem 1%;
+
+    @media(max-width: 530px){
+        width: 51%
+    }
+    @media(max-width: 400px){
+        width: auto
+    }
+}
 
 .radio{
    display: flex;
@@ -445,8 +486,8 @@ p{
     margin-bottom: 4rem;
 }
 .nav-btn{
-    padding: 1.5rem 1.5rem;
-    width: 8rem;
+    padding: 1.5rem 2rem;
+    //width: 8rem;
     font-size: 2rem;
     font-weight: 600;
     border-radius: .35rem;
@@ -537,4 +578,117 @@ p{
 .space-label{
     padding-bottom: 1.5rem;
     display: block
+}
+
+
+//============== LANDING PAGE ==================
+.landing-page-container{
+    width: 100%;
+    height: 100vh;
+    background-image: linear-gradient(
+      to right,
+      rgba(#FDFAF6, .97),
+      rgba(#FDFAF6, .97)
+    ),
+    url("../assets/swedbank_logo.png");
+    background-size: contain;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+    background-position: center center;
+    overflow: hidden;
+}
+.company-logo-2{
+    position: fixed;
+    width: 22rem;
+    top: 1.5rem;
+    left: 5rem;
+
+    @media (max-width: 430px){
+        width: 18rem
+    }
+}
+
+.landing-text-container{
+    width: 95rem;
+    margin: 3rem auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #A38C81;
+    text-align: center;
+    font-family: HeadlineBlack, Helvetica, Arial, sans-serif;
+    //background-color: green
+
+    @media (max-width: 1020px){
+        width: 80rem
+    }
+    @media (max-width: 700px){
+        width: 65rem
+    }
+    @media (max-width: 530px){
+        width: 60rem
+    }
+    @media (max-width: 460px){
+        width: 50rem
+    }
+    @media (max-width: 380px){
+        width: 45rem
+    }
+    @media (max-width: 340px){
+        width: 38rem
+    }
+}
+.about-page{
+    font-size: 2.6rem;
+
+    @media (max-width: 380px){
+        font-size: 1.8rem
+    }
+}
+.loan-advert{
+    font-size: 5rem;
+    @include zero-space;
+
+    @media (max-width: 530px){
+        font-size: 3.2rem
+    }
+    @media (max-width: 380px){
+        font-size: 2.8rem
+    }
+}
+.start-btn{
+    padding: 1.7rem 2rem;
+    width: 11rem;
+    color: $color-white;
+    background-color: #FF8854;
+    border-radius: .4rem;
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin: 3rem auto 1.5rem auto;
+    cursor: pointer;
+
+    &:hover{
+        background-color: #FDC129;
+    }
+}
+.page-intro{
+    font-size: 1.4rem;
+    @include zero-space;
+
+    @media (max-width: 380px){
+        font-size: 1.3rem
+    }
+}
+.loan-illustrator{
+    width: 45rem;
+    margin-top: 5rem;
+
+    @media (max-width: 360px){
+        width: 38rem
+    }
 }

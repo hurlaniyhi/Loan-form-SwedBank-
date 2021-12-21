@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import SmallLoan from './components/loanPage'
+import AppRoutes from './components/router/router'
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <SmallLoan />
+    <AppRoutes />
   </React.StrictMode>,
   document.getElementById('root')
 );

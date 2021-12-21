@@ -43,20 +43,20 @@ const SmallLoan = () => {
                             <div className="step-linker"></div>
                             <div className="step-container">
                                 <div className="step-circle">1</div>
-                                <p className="step-text">Application Form</p>
+                                <p className="step-text">Application</p>
                             </div>
                             <div className="step-container">
                                 <div className="step-circle">2</div>
-                                <p className="step-text">Application Form</p>
+                                <p className="step-text">Personal data</p>
                             </div>
                             <div className="step-container">
                                 <div className="step-circle">3</div>
-                                <p className="step-text">Application Form</p>
+                                <p className="step-text">Submit application</p>
                             </div>
                         </div>
                     </div>
                     <form className="form-body">
-                        <div className="application-form">
+                        <div className="application-form no-display">
                             <div className="form-centered">
                                 <div className="range-input-wrapper">
                                     <label className="input-label">Loan amount (&euro;) <span style={{color: '#F35A1B'}}>*</span></label>
@@ -235,7 +235,7 @@ const SmallLoan = () => {
                             </p>
                             <div className="comment-toggle-wrapper">
                                 <span className="toggle-line"></span>
-                                <a className="toggle-btn" onClick={handleComment}><i class="fa fa-angle-down" style={{paddingRight: "1rem"}} aria-hidden="true"></i> Comments</a>
+                                <a className="toggle-btn" onClick={handleComment}><i class="fa fa-angle-down" style={{paddingRight: "1rem", color: "#F35A1B", fontSize: "2rem", fontWeight: "bold"}} aria-hidden="true"></i> Comments</a>
                             </div>
                             
                             <div className="form-centered">
@@ -245,10 +245,32 @@ const SmallLoan = () => {
                                 </div>
                             </div>
                         </div>
+
+                        <div className="application-form">
+                            <div className="section-container" style={{marginBottom: "2rem"}}>
+                                <h3 className="section-title remove-margin">Summary</h3>
+                                <div className="summary-row">
+                                    <p className="summary-description">Loan amount</p>
+                                    <p className="summary-value">5000 &euro;</p>
+                                </div>
+                                <div className="summary-row">
+                                    <p className="summary-description">Loan Term</p>
+                                    <p className="summary-value">5 months</p>
+                                </div>
+                                <div className="summary-row">
+                                    <p className="summary-description">Monthly salary after tax</p>
+                                    <p className="summary-value">34000 &euro;</p>
+                                </div>
+                                <div className="summary-row">
+                                    <p className="summary-description">Phone number</p>
+                                    <p className="summary-value">+2348156170991</p>
+                                </div>
+                            </div>
+                        </div>
                     </form>
                     <div className="form-footer">
                         <a className="nav-btn back-btn">&#171; Back</a>
-                        <a className="nav-btn next-btn">Next &#187;</a>
+                        <a className="nav-btn next-btn">next &#187;</a>
                     </div>
                 </div>
             </div>
@@ -256,4 +278,10 @@ const SmallLoan = () => {
     )
 }
 
-export default SmallLoan
+export default {
+    routeProps: {
+        path: '/loan-page',
+        component: SmallLoan,
+    },
+    name: 'LoanPage',
+}
