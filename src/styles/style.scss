@@ -147,6 +147,7 @@ p{
     top: 0;
     left: -3rem;
     padding-right: 1rem;
+    cursor: pointer;
 }
 .info-icon-circle{
     background-color: $color-white;
@@ -160,6 +161,21 @@ p{
     border-radius: 50%;
     font-weight: bold;
 }
+.error-msg-wrapper{
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+    background-color: rgba($theme-color, .2);
+    border: .03rem solid rgba(red, .8);
+    margin-bottom: 3rem;
+}
+.error-icon-theme{
+    background-color: rgba(red, .8);
+}
+.error-icon-text{
+    color: rgba(red, .8);
+    background-color: $color-white;
+}
+
 .form-steps-wrapper{
     width: 80%;
     display: flex;
@@ -213,11 +229,23 @@ p{
     font-size: 1.5rem;
     color: #247886;
     cursor: pointer;
+    
+
+    &:hover{
+        text-decoration: underline;
+    }
 
     @media (max-width: 360px){
         display: none;
     }
 }
+.completed-status{
+    background-color: green
+}
+.ready-status{
+    background-color: #FDC129
+}
+
 .form-body{
     width: 96%;
     padding: 3rem 2% 0rem 2%;
@@ -264,12 +292,14 @@ p{
     justify-content: center;
     align-items: center;
     background-color: #EAF8F1;
+    cursor: pointer;
 }
 .input-value{
    text-align: center;
    font-size: 2rem;
    font-weight: bold;
    border: none;
+   outline: none;
 }
 .currency-symbol{
     position: absolute;
@@ -486,7 +516,7 @@ p{
     margin-bottom: 4rem;
 }
 .nav-btn{
-    padding: 1.5rem 2rem;
+    padding: 1.3rem 2rem;
     //width: 8rem;
     font-size: 2rem;
     font-weight: 600;
@@ -509,6 +539,9 @@ p{
     &:hover{
         background-color: rgba($theme-color, 1)
     }
+}
+.hide-display{
+    visibility: hidden;
 }
 
 .form-notice{
