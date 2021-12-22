@@ -228,7 +228,7 @@ const SmallLoan = () => {
                                                 </select>
                                                 <span className="dropdown-text">{payload.repaymentType}</span>
                                                 <span className="dropdown-icon"><i class="fa fa-angle-down"></i></span>
-                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div className="section-container">
@@ -339,12 +339,12 @@ const SmallLoan = () => {
                                                     marginTop: "1.5rem"
                                                 }}
                                                 inputStyle={
-                                                {
-                                                    width: window.matchMedia('(max-width: 400px)').matches ? "62%" : window.matchMedia('(max-width: 750px)').matches ? "52%" : "39%",
-                                                    height: '4.5rem',
-                                                    border: "1px solid #BCD8DA",
-                                                    borderRadius: "0.35rem"
-                                                }
+                                                    {
+                                                        width: window.matchMedia('(max-width: 400px)').matches ? "62%" : window.matchMedia('(max-width: 750px)').matches ? "52%" : "39%",
+                                                        height: '4.5rem',
+                                                        border: "1px solid #BCD8DA",
+                                                        borderRadius: "0.35rem"
+                                                    }
                                                 }
                                             />
                                         </div>
