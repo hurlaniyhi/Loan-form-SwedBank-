@@ -65,6 +65,9 @@ const SmallLoan = () => {
         if(step + 1 === 3){
             step3.current.className="step-circle ready-status"
         }
+        else{
+            step3.current.className="step-circle"
+        }
 
 
         if(type === "direct"){
@@ -378,6 +381,26 @@ const SmallLoan = () => {
                                         <p className="summary-value">{payload.monthlySalary} &euro;</p>
                                     </div>
                                     <div className="summary-row">
+                                        <p className="summary-description">Prefered repayment date</p>
+                                        <p className="summary-value">{payload.repaymentType}</p>
+                                    </div>
+                                    <div className="summary-row">
+                                        <p className="summary-description">Personal code</p>
+                                        <p className="summary-value">{payload.personalCode}</p>
+                                    </div>
+                                    <div className="summary-row">
+                                        <p className="summary-description">Marital status</p>
+                                        <p className="summary-value">{payload.maritalStatus}</p>
+                                    </div>
+                                    <div className="summary-row">
+                                        <p className="summary-description">Education</p>
+                                        <p className="summary-value">{payload.education}</p>
+                                    </div>
+                                    <div className="summary-row">
+                                        <p className="summary-description">Post held</p>
+                                        <p className="summary-value">{payload.postHeld}</p>
+                                    </div>
+                                    <div className="summary-row">
                                         <p className="summary-description">Phone number</p>
                                         <p className="summary-value">{phone}</p>
                                     </div>
@@ -389,8 +412,8 @@ const SmallLoan = () => {
                         { step != 1 ? <a className="nav-btn back-btn" onClick={() => handleSteps("back", -1)}>&#171; Back</a> : 
                         <a className="nav-btn back-btn hide-display">&#171; Back</a>
                         }
-                        { step != 3 ? <a className="nav-btn next-btn" onClick={() => handleSteps("next", 1)}>next &#187;</a> : 
-                            <a className="nav-btn next-btn" onClick={handleSubmit}>Forward application &#187;</a>
+                        { step != 3 ? <a className="nav-btn next-btn" onClick={() => handleSteps("next", 1)}>Forward &#187;</a> : 
+                            <a className="nav-btn next-btn" onClick={handleSubmit}>Submit application &#187;</a>
                         }
                     </div>
                 </div>
