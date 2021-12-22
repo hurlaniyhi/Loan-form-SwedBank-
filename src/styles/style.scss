@@ -236,7 +236,7 @@ p{
     
 
     &:hover{
-        text-decoration: underline;
+        //text-decoration: underline;
     }
 
     @media (max-width: 360px){
@@ -644,6 +644,9 @@ p{
     top: 1.5rem;
     left: 5rem;
 
+    @media (max-width: 700px){
+        left: 2rem;
+    }
     @media (max-width: 430px){
         width: 18rem
     }

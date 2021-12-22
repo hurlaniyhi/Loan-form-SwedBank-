@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import React, { useState, useRef } from 'react'
 import companyLogo from '../assets/swedbank-img-logo.svg'
 import PhoneInput from 'react-phone-input-2'
 import {useHistory} from 'react-router-dom'
@@ -13,6 +13,7 @@ const SmallLoan = () => {
     const [showComment, setShowComment] = useState(false)
     const [step, setStep] = useState(1)
     const [payload, setPayload] = useState(constant.INITIAL_STATE)
+    const[radio, setRadio] = useState({yes: false, no: false})
 
     const commentContainer = useRef(null)
     const commentText = useRef(null)
@@ -34,53 +35,77 @@ const SmallLoan = () => {
         }
     }
 
-    function handleSteps(type, val){
-
-        errorMessage.current.className = "form-info-wrapper error-msg-wrapper no-display"
-
-        if(step === 1){
-            if(payload.loanAmount && payload.loanTerm && payload.repaymentType && payload.monthlySalary){
-                step1.current.className="step-circle completed-status"
-            }
-            else{
-                step1.current.className="step-circle"
-                if(type === "next"){
-                   return errorMessage.current.className = "form-info-wrapper error-msg-wrapper"
-                }
-            }
-        }
-        else if(step === 2){
-            if(payload.firstName && payload.lastName && payload.maritalStatus && payload.personalCode && 
-                payload.education && payload.postHeld && phone){
-                step2.current.className="step-circle completed-status"
-            }
-            else{
-                step2.current.className="step-circle"
-                if(type === "next"){
-                    return errorMessage.current.className = "form-info-wrapper error-msg-wrapper"
-                }
-            }
-        }
-
-        if(step + 1 === 3){
+    function handleStepStatus(val){
+        if(step + val === 3){
             step3.current.className="step-circle ready-status"
         }
         else{
             step3.current.className="step-circle"
         }
 
-
-        if(type === "direct"){
-            setStep(val)
+        if(step + val === 2){
+            step2.current.className="step-circle ready-status"
         }
-        else{
-            setStep(step + val)
+        if(step + val === 1){
+            step1.current.className="step-circle ready-status"
         }
     }
 
+    function handleSteps(type, val){
+
+        errorMessage.current.className = "form-info-wrapper error-msg-wrapper no-display"
+
+        if(step === 1){
+            if(payload.loanAmount && payload.loanTerm && payload.repaymentType && payload.monthlySalary && payload.obligation){
+                handleStepStatus(val)
+                step1.current.className="step-circle completed-status"
+            }
+            else{
+                step1.current.className="step-circle"
+                if(type === "next"){
+                    step1.current.className="step-circle ready-status"
+                   return errorMessage.current.className = "form-info-wrapper error-msg-wrapper"
+                }
+                if(type === "back"){
+                    handleStepStatus(val)
+                }
+            }
+        }
+        else if(step === 2){
+            if(payload.firstName && payload.lastName && payload.maritalStatus && payload.personalCode && 
+                payload.education && payload.postHeld && phone){
+                handleStepStatus(val)
+                step2.current.className="step-circle completed-status"
+            }
+            else{
+                step2.current.className="step-circle"
+                if(type === "next"){
+                    step2.current.className="step-circle ready-status"
+                    return errorMessage.current.className = "form-info-wrapper error-msg-wrapper"
+                }
+                if(type === "back"){
+                    handleStepStatus(val)
+                }
+            }
+        }
+        else if(step === 3){
+            handleStepStatus(val)
+        }
+
+        setStep(step + val)
+    }
+
     function handleInput(e){
+        console.log({data: e.target.value})
+        if(e.target.name === "obligation"){
+            if(e.target.value === "Yes"){
+                setRadio({yes: true, no: false})
+            }
+            else{
+                setRadio({yes: false, no: true})
+            }
+        }
         setPayload({...payload, [e.target.name]: e.target.value})
-        console.log({payload})
     }
 
     function validateInputRange(){
@@ -105,7 +130,7 @@ const SmallLoan = () => {
     }
 
     function handleSubmit(){
-        if(payload.loanAmount && payload.loanTerm && payload.repaymentType && payload.monthlySalary
+        if(payload.loanAmount && payload.loanTerm && payload.repaymentType && payload.monthlySalary && payload.obligation
             && payload.firstName && payload.lastName && payload.maritalStatus && payload.personalCode && 
             payload.education && payload.postHeld && phone){
                 alert("Your loan request has been submitted successfully")
@@ -139,15 +164,15 @@ const SmallLoan = () => {
                             <div className="step-linker"></div>
                             <div className="step-container">
                                 <div className="step-circle" ref={step1}>1</div>
-                                <p className="step-text" onClick={() => handleSteps("direct", 1)}>Application</p>
+                                <p className="step-text">Application</p>
                             </div>
                             <div className="step-container">
                                 <div className="step-circle" ref={step2}>2</div>
-                                <p className="step-text" onClick={() => handleSteps("direct", 2)}>Personal data</p>
+                                <p className="step-text">Personal data</p>
                             </div>
                             <div className="step-container">
                                 <div className="step-circle" ref={step3}>3</div>
-                                <p className="step-text" onClick={() => handleSteps("direct", 3)}>Submit application</p>
+                                <p className="step-text">Summary</p>
                             </div>
                         </div>
                     </div>
@@ -192,11 +217,9 @@ const SmallLoan = () => {
                                         <label className="input-label">Prefered repayment date <span style={{color: '#F35A1B'}}>*</span></label>
                                         <div className="custom-dropdown input-field">
                                                 <select className="select-field" name="repaymentType" onChange={handleInput}>
-                                                    <option value=""></option>
-                                                    <option value="7">7</option>
-                                                    <option value="10">10</option>
-                                                    <option value="12">12</option>
-                                                    <option value="15">15</option>
+                                                    {React.Children.toArray(
+                                                        constant.REPAYMENT_DATE_LIST.map( item => <option value={item}>{item}</option>)
+                                                    )}
                                                 </select>
                                                 <span className="dropdown-text">{payload.repaymentType}</span>
                                                 <span className="dropdown-icon"><i class="fa fa-angle-down"></i></span>
@@ -211,10 +234,10 @@ const SmallLoan = () => {
                                         <input className="input-field resize-input" type="tel" name="monthlySalary" value={payload.monthlySalary} onChange={handleInput} />
                                     </div>
                                     <div className="range-input-wrapper">
-                                        <label className="input-label">Do you have obligations outside Swedbank?<span style={{color: '#F35A1B'}}>*</span></label>
+                                        <label className="input-label">Do you have obligations outside Swedbank? <span style={{color: '#F35A1B'}}>*</span></label>
                                         <div className="radio">
                                             <div class="form-radio-group">
-                                                <input type="radio" class="form-radio-input" value="Admin" id="admin" name="obligation" onChange={handleInput} />
+                                                <input type="radio" class="form-radio-input" checked={radio.no} value="No" id="admin" name="obligation" onChange={handleInput} />
                                                 <label for="admin" class="form-radio-label">
                                                     <span class="form-radio-button"></span>
                                                 </label>
@@ -222,7 +245,7 @@ const SmallLoan = () => {
                                             </div>
 
                                             <div class="form-radio-group">
-                                                <input type="radio" class="form-radio-input" value="Staff" id="staff" name="obligation" onChange={handleInput} />
+                                                <input type="radio" class="form-radio-input" checked={radio.yes} value="Yes" id="staff" name="obligation" onChange={handleInput} />
                                                 <label for="staff" class="form-radio-label">
                                                     <span class="form-radio-button"></span>
                                                 </label>
@@ -256,12 +279,9 @@ const SmallLoan = () => {
                                             <label className="input-label">Marital Status <span style={{color: '#F35A1B'}}>*</span></label>
                                             <div className="custom-dropdown input-field">
                                                 <select className="select-field" name="maritalStatus" onChange={handleInput}>
-                                                    <option value=""></option>
-                                                    <option value="single">Single</option>
-                                                    <option value="married">Married</option>
-                                                    <option value="common law marriage">Common law marriage</option>
-                                                    <option value="divorced">Divorced</option>
-                                                    <option value="widow/widower">Widow/Widower</option>
+                                                    {React.Children.toArray(
+                                                        constant.MARITAL_STATUS_LIST.map( item => <option value={item}>{item}</option>)
+                                                    )}
                                                 </select>
                                                 <span className="dropdown-text">{payload.maritalStatus}</span>
                                                 <span className="dropdown-icon"><i class="fa fa-angle-down"></i></span>
@@ -273,14 +293,12 @@ const SmallLoan = () => {
                                     <h3 className="section-title">Extended data</h3>
                                     <div className="form-centered">
                                         <div className="range-input-wrapper">
-                                            <label className="input-label">Education<span style={{color: '#F35A1B'}}>*</span></label>
+                                            <label className="input-label">Education <span style={{color: '#F35A1B'}}>*</span></label>
                                             <div className="custom-dropdown input-field">
                                                 <select className="select-field" name="education" onChange={handleInput}>
-                                                    <option value=""></option>
-                                                    <option value="primary">Primary</option>
-                                                    <option value="secondary">Secondary</option>
-                                                    <option value="vocational">Vocational</option>
-                                                    <option value="higher">Higher</option>
+                                                    {React.Children.toArray(
+                                                        constant.EDUCATION_LIST.map( item => <option value={item}>{item}</option>)
+                                                    )}
                                                 </select>
                                                 <span className="dropdown-text">{payload.education}</span>
                                                 <span className="dropdown-icon"><i class="fa fa-angle-down"></i></span>
@@ -292,17 +310,9 @@ const SmallLoan = () => {
                                             <label className="input-label">Post held <span style={{color: '#F35A1B'}}>*</span></label>
                                             <div className="custom-dropdown input-field">
                                                 <select className="select-field" name="postHeld" onChange={handleInput} >
-                                                    <option value=""></option>
-                                                    <option value="worker">Worker</option>
-                                                    <option value="specialist/office worker">Specialist/Office worker</option>
-                                                    <option value="superior specialist">Superior specialist</option>
-                                                    <option value="middle manager">Middle manager</option>
-                                                    <option value="executive">Executive</option>
-                                                    <option value="owner">Owner</option>
-                                                    <option value="student">Student</option>
-                                                    <option value="pensioneer">Pensioneer</option>
-                                                    <option value="unemployed">Unemployed</option>
-                                                    <option value="private enterprenuer">Private enterpreneur</option>
+                                                    {React.Children.toArray(
+                                                        constant.POST_HELD_LIST.map( item => <option value={item}>{item}</option>)
+                                                    )}
                                                 </select>
                                                 <span className="dropdown-text">{payload.postHeld}</span>
                                                 <span className="dropdown-icon"><i class="fa fa-angle-down"></i></span>
@@ -412,8 +422,8 @@ const SmallLoan = () => {
                         { step != 1 ? <a className="nav-btn back-btn" onClick={() => handleSteps("back", -1)}>&#171; Back</a> : 
                         <a className="nav-btn back-btn hide-display">&#171; Back</a>
                         }
-                        { step != 3 ? <a className="nav-btn next-btn" onClick={() => handleSteps("next", 1)}>Forward &#187;</a> : 
-                            <a className="nav-btn next-btn" onClick={handleSubmit}>Submit application &#187;</a>
+                        { step != 3 ? <a className="nav-btn next-btn" onClick={() => handleSteps("next", 1)}>Next &#187;</a> : 
+                            <a className="nav-btn next-btn" onClick={handleSubmit}>Submit &#187;</a>
                         }
                     </div>
                 </div>
