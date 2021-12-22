@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import companyLogo from '../assets/swedbank-img-logo.svg'
 import PhoneInput from 'react-phone-input-2'
 import {useHistory} from 'react-router-dom'
@@ -21,6 +21,11 @@ const SmallLoan = () => {
     const step2 = useRef(null)
     const step3 = useRef(null)
     const errorMessage = useRef(null)
+
+    useEffect(() => {
+        step1.current.className = "step-circle ready-status"
+    }, [])
+    
 
     function handleComment(){
         if(commentContainer.current.style.opacity != "1"){
