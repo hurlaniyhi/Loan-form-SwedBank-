@@ -568,7 +568,6 @@ p{
     height: .05rem;
     background-color: rgba(0,0,0, .1);
     width: 100%;
-    z-index: 1;
 }
 .toggle-btn{
     width: 12rem;
@@ -583,7 +582,6 @@ p{
     border: .05rem solid rgba(0,0,0, .1);
     background-color: $color-white;
     border-radius: 10rem;
-    z-index: 2;
     cursor: pointer;
 }
 
