@@ -2,7 +2,7 @@
 
 This application was created using React.js frame work
 
-## To run The project (app) locally
+## To run the project (app) locally
 
 - clone the repository from github by running "git clone https://github.com/hurlaniyhi/Personal-Loan-SwedBank.git" on your command prompt
 
