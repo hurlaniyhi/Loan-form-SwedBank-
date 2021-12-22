@@ -152,7 +152,7 @@ const SmallLoan = () => {
                 <img className="company-logo" src={companyLogo} onClick={() => history.push("/")} />
             </div>
             <div className="loan-container">
-                <h3 className="page-title">Small loan application</h3>
+                <h3 className="page-title">Personal Loan Application</h3>
                 <div className="form-container">
                     <div className="form-header">
                         <div className="form-info-wrapper">
